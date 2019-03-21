@@ -3,5 +3,5 @@ from . import views
 
 app_name = 'barback'
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
 ]
