@@ -1,0 +1,13 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<h1>Cocktail List</h1>
+{% if latest_cocktail_list %}
+  <ul>
+    {%for cocktail in latest_cocktail_list %}
+    <li>{{ cocktail.cocktail_name }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No cocktails are available.</p>
+{% endif %}
