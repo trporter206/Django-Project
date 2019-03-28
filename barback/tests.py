@@ -63,3 +63,16 @@ class CocktailIndexViewTests(TestCase):
             response.context['latest_cocktail_list'],
             ['<Cocktail: Past cocktail 2.>', '<Cocktail: Past cocktail 1.>']
         )
+
+class CocktailDetailViewTests(TestCase):
+    def test_future_cocktail(self):
+        future_cocktail = create_cocktail(cocktail_name='future cocktail', days=5)
+        url = reverse('barback:detail', args=(future_cocktail.id,))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_past_cocktail(self):
+        past_cocktail = create_cocktail(cocktail_name='past cocktail', days=-5)
+        url = reverse('barback:detail', args=(past_cocktail.id,))
+        response = self.client.get(url)
+        self.assertContains(response, past_cocktail.cocktail_name)

@@ -3,15 +3,16 @@ from django.utils import timezone
 import datetime
 
 class Cocktail(models.Model):
-    cocktail_name = models.CharField(max_length = 50)
-    cocktail_image = models.ImageField
-    pub_date = models.DateTimeField('date published')
+    cocktail_name   = models.CharField(max_length = 50)
+    cocktail_image  = models.ImageField
+    pub_date        = models.DateTimeField(default=timezone.now())
 
     cocktail_type_choices = (
         ('WHISKEY', 'Whiskey'),
         ('VODKA', 'Vodka'),
         ('TEQUILA', 'Tequila'),
         ('GIN', 'Gin'),
+        ('VIRGIN', 'Virgin'),
     )
     cocktail_type = models.CharField(max_length = 10, choices = cocktail_type_choices)
 
