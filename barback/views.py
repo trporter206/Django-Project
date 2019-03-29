@@ -13,7 +13,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_cocktail_list'
 
     def get_queryset(self):
-        return Cocktail.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        return Cocktail.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 
 class DetailView(generic.DetailView):
     model = Cocktail
@@ -42,3 +42,8 @@ def save(request, cocktail_id):
         created_type.save()
         created_pub_date.save()
         # return HttpResponseRedirect(reverse('barback:detail', args=(cocktail.id,)))
+
+def delete(request, cocktail_id):
+    model = get_object_or_404(Cocktail, pk=cocktail_id)
+    model.delete()
+    return HttpResponseRedirect(reverse('barback:index'))

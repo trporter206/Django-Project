@@ -4,3 +4,5 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <h3>{{ cocktail.cocktail_type }}</h3>
+
+<a href="{% url 'barback:delete' cocktail.id  %}">delete</a>
