@@ -9,6 +9,7 @@ from django.template import loader
 from django.urls import reverse
 import datetime
 from .forms import CocktailForm
+from django.views import View
 
 
 class IndexView(generic.ListView):
@@ -28,6 +29,9 @@ class DetailView(generic.DetailView):
 class CreateView(generic.edit.CreateView):
     model = Cocktail
     fields = ['cocktail_name', 'cocktail_type', 'cocktail_image']
+
+class AboutView(generic.TemplateView):
+    template_name = "barback/about.html"
 
 def save(request, cocktail_id):
     form = CocktailForm(request.POST or None, request.FILES or None)
