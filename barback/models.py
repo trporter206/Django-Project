@@ -4,8 +4,8 @@ import datetime
 
 class Cocktail(models.Model):
     cocktail_name   = models.CharField(max_length = 50)
-    cocktail_image  = models.ImageField
-    pub_date        = models.DateTimeField(default=timezone.now())
+    cocktail_image  = models.ImageField(upload_to="cocktail_images/", blank=True, null=True)
+    pub_date        = models.DateTimeField(auto_now=True)
 
     cocktail_type_choices = (
         ('WHISKEY', 'Whiskey'),
@@ -22,6 +22,9 @@ class Cocktail(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=2) <= self.pub_date <= now
+
+    def get_absolute_url(self):
+        return reverse("barback:detail", kwargs={"id": self.id})
 
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True

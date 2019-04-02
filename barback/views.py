@@ -3,9 +3,12 @@ from django.views import generic
 from django.utils import timezone
 from .models import Cocktail
 from django.db import models
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.urls import reverse
+import datetime
+from .forms import CocktailForm
 
 
 class IndexView(generic.ListView):
@@ -24,24 +27,15 @@ class DetailView(generic.DetailView):
 
 class CreateView(generic.edit.CreateView):
     model = Cocktail
-    fields = ['cocktail_name', 'cocktail_type']
+    fields = ['cocktail_name', 'cocktail_type', 'cocktail_image']
 
 def save(request, cocktail_id):
-    cocktail = get_object_or_404(Cocktail, pk=cocktail_id)
-    try:
-        created_name     = cocktail.cocktail_name.get(pk=request.POST['cocktail_name'])
-        created_type     = cocktail.cocktail_type.get(pk=request.POST['cocktail_type'])
-        created_pub_date = cocktail.cocktail_pub_date.get(pk=request.POST['cocktail_pub_date'])
-    except (KeyError, Cocktail.DoesNotExist):
-        return render(request, 'barback/cocktail_form.html', {
-            'cocktail': cocktail,
-            'error_message': "You didn't create a cocktail.",
-        })
-    else:
-        created_name.save()
-        created_type.save()
-        created_pub_date.save()
-        # return HttpResponseRedirect(reverse('barback:detail', args=(cocktail.id,)))
+    form = CocktailForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        messages.success(request, "Successfully Created")
+        return HttpResponseRedirect(reverse('barback:detail', args=(cocktail.id,)))
 
 def delete(request, cocktail_id):
     model = get_object_or_404(Cocktail, pk=cocktail_id)
