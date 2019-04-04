@@ -1,5 +1,6 @@
 from django import forms
 from .models import Cocktail
+from django.contrib.auth.models import User
 
 class CocktailForm(forms.ModelForm):
     class Meta:
@@ -8,4 +9,15 @@ class CocktailForm(forms.ModelForm):
             "cocktail_name",
             "cocktail_image",
             "cocktail_type",
+        ]
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'password',
         ]

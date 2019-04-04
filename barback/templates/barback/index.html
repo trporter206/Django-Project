@@ -1,8 +1,15 @@
-{% block body %}
-  <body>
-    {% load static %}
+{% extends 'base.html' %}
+<h1>Barback</h1>
+{% block head %}
+<title>Home</title>
+{% endblock %}
 
+{% block body %}
+    {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'barback/style.css' %}">
+    <p><a href="{% url 'barback:register' %}">Sign Up</a></p>
+    <a href="{% url 'barback:login' %}">Sign In</a>
+    <a href="{% url 'barback:logout' %}">Sign Out</a>
     <h1>Cocktail List</h1>
     <a href="{% url 'barback:cocktail_form' %}">Create a cocktail</a>
     {% if latest_cocktail_list %}
@@ -15,5 +22,4 @@
       <p>No cocktails are available.</p>
     {% endif %}
     <p><a href="{% url 'barback:about' %}">About</a></p>
-  </body>
 {% endblock %}
