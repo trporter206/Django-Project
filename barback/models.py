@@ -6,6 +6,9 @@ class Cocktail(models.Model):
     cocktail_name   = models.CharField(max_length = 50)
     cocktail_image  = models.ImageField(upload_to="cocktail_images/", blank=True, null=True)
     pub_date        = models.DateTimeField(auto_now=True)
+    cocktail_info   = models.CharField(max_length = 200, blank=True, null=True)
+    cocktail_steps  = models.CharField(max_length = 1000, blank=True, null=True)
+    virgin          = models.BooleanField(null=True)
 
     cocktail_type_choices = (
         ('WHISKEY', 'Whiskey'),

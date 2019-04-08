@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
 from .models import Cocktail
+from django.contrib.auth.models import User
 import datetime
 
 class CocktailModelTests(TestCase):

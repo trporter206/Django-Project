@@ -27,7 +27,13 @@ class DetailView(generic.DetailView):
 
 class CreateView(generic.edit.CreateView):
     model = Cocktail
-    fields = ['cocktail_name', 'cocktail_type', 'cocktail_image']
+    fields = ['cocktail_name',
+              'cocktail_type',
+              'cocktail_image',
+              'cocktail_info',
+              'cocktail_steps',
+              'virgin',
+              ]
 
 class AboutView(generic.TemplateView):
     template_name = "barback/about.html"

@@ -9,7 +9,8 @@
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
     <h3>{{ cocktail.cocktail_type }}</h3>
-
+    <h2>how to create</h2>
+    <p>{{ cocktail.cocktail_steps }}</p>
     <a href="{% url 'barback:delete' cocktail.id  %}">delete</a>
   </body>
 {% endblock %}

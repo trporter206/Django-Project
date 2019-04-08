@@ -9,6 +9,9 @@ class CocktailForm(forms.ModelForm):
             "cocktail_name",
             "cocktail_image",
             "cocktail_type",
+            "cocktail_info",
+            "cocktail_steps",
+            "virgin",
         ]
 
 class UserForm(forms.ModelForm):
