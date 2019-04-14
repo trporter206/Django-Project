@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.contrib.auth.models import User
 
 class Cocktail(models.Model):
     cocktail_name   = models.CharField(max_length = 50)
@@ -9,6 +10,7 @@ class Cocktail(models.Model):
     cocktail_info   = models.CharField(max_length = 200, blank=True, null=True)
     cocktail_steps  = models.CharField(max_length = 1000, blank=True, null=True)
     virgin          = models.BooleanField(null=True)
+    user            = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     cocktail_type_choices = (
         ('WHISKEY', 'Whiskey'),
