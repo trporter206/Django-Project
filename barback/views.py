@@ -1,14 +1,15 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.utils import timezone
-from .models import Cocktail
+from .models import Cocktail, UserProfile
 from django.db import models
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.urls import reverse
 import datetime
-from .forms import CocktailForm, UserForm
+from .forms import CocktailForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
 class IndexView(generic.ListView):
@@ -38,32 +39,44 @@ class CreateView(generic.edit.CreateView):
 class AboutView(generic.TemplateView):
     template_name = "barback/about.html"
 
-class UserFormView(View):
-    form_class = UserForm
+def register(request):
     template_name = 'registration/registration_form.html'
-
-    #display form
-    def get(self, request):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    #submit form
-    def post(self, request):
-        form = self.form_class(request.POST)
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            #normalized data
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user.set_password(password)
-            user.save()
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('barback:index')
+            user = form.save()
+            login(request, user)
+            return redirect('barback:index')
+    else:
+        form = UserCreationForm()
+        return render(request, template_name, {'form': form})
 
-        return render(request, self.template_name, {'form': form})
+# class UserFormView(View):
+#     form_class = UserForm
+#     template_name = 'registration/registration_form.html'
+#
+#     #display form
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {'form': form})
+#
+#     #submit form
+#     def post(self, request):
+#         form = self.form_class(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             #normalized data
+#             username = form.cleaned_data['username']
+#             password = form.cleaned_data['password']
+#             user.set_password(password)
+#             user.save()
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 if user.is_active:
+#                     login(request, user)
+#                     return redirect('barback:index')
+#
+#         return render(request, self.template_name, {'form': form})
 
 def save(request, cocktail_id):
     form = CocktailForm(request.POST or None, request.FILES or None)

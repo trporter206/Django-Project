@@ -1,45 +1,17 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-{% block body %}
-{% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'barback/style.css' %}">
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                  <a class="nav-link active" href="{% url 'barback:about' %}">About</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'barback:index' %}">Cocktails</a>
-              </li>
-          </ul>
-      </div>
-      <div class="mx-auto order-0">
-          <a class="navbar-brand mx-auto" href="{% url 'barback:index' %}">Barback</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-      </div>
-      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-          <ul class="navbar-nav ml-auto">
-            {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'barback:logout' %}">Sign Out</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'barback:register' %}">Sign Up</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'barback:login' %}">Sign In</a>
-              </li>
-            {% endif %}
-          </ul>
-      </div>
-  </nav>
-  <div class="container">
-    <h1>About Barback</h1>
+{% extends 'base.html' %}
+<head>
+  {% block head %}
+  <title>About</title>
+  {% endblock %}
+</head>
+<body>
+  {% block body %}
+  {% load static %}
+    <div class="container">
+      <h1>About Barback</h1>
 
-    <p>information about barback</p>
-  </div>
-{% endblock %}
+      <p>information about barback</p>
+    </div>
+  {% endblock %}
+</body>

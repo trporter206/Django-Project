@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cocktail
+from .models import Cocktail, UserProfile
 from django.contrib.auth.models import User
 
 class CocktailForm(forms.ModelForm):
@@ -18,9 +18,12 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = User
+        model = UserProfile
         fields = [
             'username',
+            'first_name',
+            'last_name',
+            'city',
             'email',
             'password',
         ]
