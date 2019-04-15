@@ -16,4 +16,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', LoginView.as_view(template_name='registration/login.html', redirect_field_name=('http://127.0.0.1:8000/barback/')), name="login"),
     path('logout/', views.logout_view, name='logout'),
+    path('profile/', views.profile, name='profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

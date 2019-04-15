@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="utf-8">
     {% block head %}
-    <title>Base</title>
     {% endblock %}
   </head>
   <body>
@@ -30,7 +29,7 @@
             <ul class="navbar-nav ml-auto">
               {% if request.user.is_authenticated %}
               <li class="nav-item">
-                  <a class="nav-link" href="">{{ request.user.username }}</a>
+                  <a class="nav-link" href="{% url 'barback:profile' %}">{{ request.user.username }}</a>
               </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'barback:logout' %}">Sign Out</a>

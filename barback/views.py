@@ -11,6 +11,7 @@ import datetime
 from .forms import CocktailForm, UserForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 class IndexView(generic.ListView):
     template_name = 'barback/index.html'
@@ -67,3 +68,7 @@ def delete(request, cocktail_id):
 def logout_view(request):
     logout(request)
     return redirect('barback:index')
+
+def profile(request):
+    args = {'user': request.user}
+    return render(request, 'barback/profile.html', args)
