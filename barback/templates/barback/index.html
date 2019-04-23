@@ -20,18 +20,19 @@
       </div>
       <div class="wrapper grid">
         {% for cocktail in latest_cocktail_list %}
-        <div class="col col-md-4">
-          <div class="card">
-            <img src="{{ cocktail.cocktail_image.url }}" class="card-img-top" hieght="278" width="185">
-            <!-- set image too 278x185 -->
-            <div class="card-body">
-              <a href="{% url 'barback:detail' cocktail.id %}">
-                <h5 class="card-title text-center">{{ cocktail.cocktail_name }}</h5>
-              </a>
-              <p class="card-text text-center">{{ cocktail.cocktail_info }}</p>
+          {% if cocktail.public %}
+            <div class="col col-md-4">
+              <div class="card">
+                <img src="{{ cocktail.cocktail_image.url }}" class="card-img-top" height="185" width="278">
+                <div class="card-body">
+                  <a href="{% url 'barback:detail' cocktail.id %}">
+                    <h5 class="card-title text-center">{{ cocktail.cocktail_name }}</h5>
+                  </a>
+                  <p class="card-text text-center">{{ cocktail.cocktail_info }}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          {% endif %}
         {% endfor %}
       </div>
     {% else %}

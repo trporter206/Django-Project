@@ -15,6 +15,7 @@ class CocktailForm(forms.ModelForm):
             "cocktail_info",
             "cocktail_steps",
             "virgin",
+            "public",
         ]
 
 class UserForm(UserCreationForm):

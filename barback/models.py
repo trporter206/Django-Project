@@ -21,6 +21,7 @@ class Cocktail(models.Model):
     cocktail_steps  = models.CharField(max_length = 1000, blank=True, null=True)
     virgin          = models.BooleanField(null=True)
     user            = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, null=True)
+    public          = models.BooleanField(null=True)
 
     cocktail_type_choices = (
         ('WHISKEY', 'Whiskey'),

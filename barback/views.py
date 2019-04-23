@@ -52,6 +52,7 @@ class CreateView(generic.edit.CreateView):
               'cocktail_info',
               'cocktail_steps',
               'virgin',
+              'public',
               ]
 
 class AboutView(generic.TemplateView):
