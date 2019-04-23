@@ -4,13 +4,30 @@ from django.utils import timezone
 from .models import Cocktail, UserProfile
 from django.db import models
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+    redirect
+)
 from django.template import loader
 from django.urls import reverse
 import datetime
-from .forms import CocktailForm, UserForm
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
+from .forms import (
+    CocktailForm,
+    UserForm,
+    EditProfileForm,
+)
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    PasswordChangeForm
+)
+from django.contrib.auth import (
+    authenticate,
+    login,
+    logout,
+    update_session_auth_hash
+)
 from django.contrib.auth.models import User
 
 class IndexView(generic.ListView):
@@ -69,6 +86,31 @@ def logout_view(request):
     logout(request)
     return redirect('barback:index')
 
-def profile(request):
+def view_profile(request):
     args = {'user': request.user}
     return render(request, 'barback/profile.html', args)
+
+def edit_profile(request):
+    template_name = 'barback/edit_profile.html'
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('barback:profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        return render(request, template_name, {'form': form})
+
+def change_password(request):
+    template_name = 'barback/password.html'
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('barback:profile')
+        else:
+            return redirect('barback:password')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request, template_name, {'form': form})

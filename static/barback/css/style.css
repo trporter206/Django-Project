@@ -1,6 +1,48 @@
-h1 {
-  color: red;
+body {
+  background-color: #eee;
 }
-p {
-   color: grey;
+
+
+.buttons {
+  max-width: 92%;
+  width: 900px;
+  text-align: right;
+  margin: 20px auto 0;
+  padding-right: 3%;
+}
+
+button {
+  height: 36px;
+  width: 60px;
+  margin-left: 4px;
+  font-size: 24px;
+  color: orange;
+  text-align: center;
+  line-height: 1.4;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: white;
+  box-shadow: 0px 1px 2px #bbb;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 3px #666;
+}
+
+button.on {
+  color: white;
+  background-color: #ccc;
+}
+
+.wrapper {
+  max-width: 100%;
+  width: 900px;
+  margin: 10px auto 40px;
+  padding: 20px;
+  background-color: #ddd;
+  font-family: Roboto;
+  position: relative;
+  overflow: hidden;
 }

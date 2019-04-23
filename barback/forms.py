@@ -2,9 +2,10 @@ from django import forms
 from .models import Cocktail, UserProfile
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 class CocktailForm(forms.ModelForm):
+
     class Meta:
         model = Cocktail
         fields = [
@@ -40,3 +41,14 @@ class UserForm(UserCreationForm):
             user.save()
 
         return user
+
+class EditProfileForm(UserChangeForm):
+
+    class Meta:
+        model = User
+        fields = [
+            'email',
+            'first_name',
+            'last_name',
+            'password',
+        ]
