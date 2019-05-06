@@ -1,7 +1,7 @@
 body {
-  background-color: #eee;
+  background-color: #FFEFD5;
+  margin-top: 60px;
 }
-
 
 .buttons {
   max-width: 92%;
@@ -36,13 +36,15 @@ button.on {
   background-color: #ccc;
 }
 
+.container {
+  width: 100%;
+}
+
 .wrapper {
-  max-width: 100%;
-  width: 900px;
+  width: 100%;
   margin: 10px auto;
   font-family: Roboto;
   position: relative;
-  overflow: hidden;
 }
 
 * {

@@ -22,6 +22,7 @@ class Cocktail(models.Model):
     virgin          = models.BooleanField(null=True)
     user            = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=True, null=True)
     public          = models.BooleanField(null=True)
+    likes           = models.IntegerField(null=True, default=0)
 
     cocktail_type_choices = (
         ('WHISKEY', 'Whiskey'),

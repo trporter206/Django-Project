@@ -35,7 +35,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_cocktail_list'
 
     def get_queryset(self):
-        return Cocktail.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+        return Cocktail.objects.filter(public=True).order_by('-pub_date')
 
 class DetailView(generic.DetailView):
     model = Cocktail
@@ -57,6 +57,10 @@ class CreateView(generic.edit.CreateView):
 
 class AboutView(generic.TemplateView):
     template_name = "barback/about.html"
+
+def view_profile(request):
+    args = {'user': request.user}
+    return render(request, 'barback/profile.html', args)
 
 def register(request):
     template_name = 'registration/registration_form.html'
@@ -87,9 +91,6 @@ def logout_view(request):
     logout(request)
     return redirect('barback:index')
 
-def view_profile(request):
-    args = {'user': request.user}
-    return render(request, 'barback/profile.html', args)
 
 def edit_profile(request):
     template_name = 'barback/edit_profile.html'
