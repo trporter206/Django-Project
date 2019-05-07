@@ -35,7 +35,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_cocktail_list'
 
     def get_queryset(self):
-        return Cocktail.objects.filter(public=True).order_by('-pub_date')
+        return Cocktail.objects.order_by('-pub_date')
 
 class DetailView(generic.DetailView):
     model = Cocktail

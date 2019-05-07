@@ -6,7 +6,7 @@
   $cocktails.each(function() {
     cache.push({
       element: this,
-      text: this.trim().toLowerCase()
+      text: this.id.trim().toLowerCase()
     });
   });
   function filter() {
